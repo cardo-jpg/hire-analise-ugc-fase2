@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise · UGC e Fase 2</title>
+<meta name="description" content="Análise da Cardô pra Hire: o UGC Latam (recomendação de pausa), e a leitura calma do custo por lead da Fase 2 WhatsApp — o que mudou e o que já corrigimos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F1EA; --paper-2:#FBFAF6; --paper-3:#EFEBE2;
+    --ink:#1B1620; --ink-2:#3B3340; --ink-soft:#6A6072; --line:#E3DCD0; --line-2:#D5CCBD;
+    --plum:#7A1FA2; --plum-wash:#F1E7F5; --coral:#FF4D6D; --gold:#C08A1E;
+    --good:#1C8A54; --bad:#C7371F;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Bricolage Grotesque',sans-serif; --mono:'JetBrains Mono',monospace;
+    --mw:1000px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;font-size:118%;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--mw);margin:0 auto;padding:0 24px;}
+  .disp{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.05;text-wrap:balance;}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--plum);}
+
+  .hero{padding:72px 0 44px;border-bottom:1px solid var(--line);}
+  .hero h1{font-size:clamp(2.1rem,6vw,3.2rem);margin-top:18px;}
+  .hero .thesis{max-width:64ch;margin-top:20px;font-size:1.08rem;color:var(--ink-2);}
+  .hero .thesis b{color:var(--ink);font-weight:600;}
+
+  section{padding:52px 0;border-bottom:1px solid var(--line);}
+  .rn{font-family:var(--mono);font-size:.76rem;color:var(--plum);letter-spacing:.1em;}
+  h2{font-family:var(--disp);font-weight:800;font-size:clamp(1.6rem,4vw,2.3rem);margin-top:8px;}
+  .intro{margin-top:14px;font-size:1.02rem;color:var(--ink-2);max-width:68ch;} .intro b{color:var(--ink);font-weight:600;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;border:1px solid var(--line-2);border-radius:16px;overflow:hidden;background:var(--paper-2);margin-top:26px;}
+  .stat{padding:20px 22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stat .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);}
+  .stat .n{font-family:var(--disp);font-weight:800;font-size:1.9rem;margin-top:7px;font-variant-numeric:tabular-nums;line-height:1;}
+  .stat .n.bad{color:var(--bad);} .stat .n.gd{color:var(--good);} .stat .n.pl{color:var(--plum);} .stat .n.sm{font-size:1.4rem;line-height:1.1;}
+  .stat .d{font-size:.76rem;color:var(--ink-soft);margin-top:6px;}
+
+  .call{padding:22px 24px;border-radius:16px;border:1px solid var(--line-2);background:var(--paper-2);margin-top:22px;}
+  .call .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--plum);}
+  .call.good{border-color:rgba(28,138,84,.35);background:#F0F6F1;} .call.good .tag{color:var(--good);}
+  .call.warn{border-color:rgba(192,138,30,.4);background:#F8F2E4;} .call.warn .tag{color:var(--gold);}
+  .call.bad{border-color:rgba(199,55,31,.35);background:#F9EDEA;} .call.bad .tag{color:var(--bad);}
+  .call p{margin-top:9px;font-size:.98rem;color:var(--ink-2);} .call p b{color:var(--ink);font-weight:600;}
+
+  /* Funil enxuto */
+  .funnel{display:flex;flex-direction:column;gap:10px;border:1px solid var(--line-2);border-radius:16px;background:var(--paper-2);padding:24px;margin-top:24px;}
+  .fstep{display:flex;align-items:center;gap:14px;}
+  .fstep .bar{flex:1;height:30px;border-radius:8px;display:flex;align-items:center;padding-left:14px;font-family:var(--mono);font-weight:700;font-size:.86rem;color:#fff;white-space:nowrap;min-width:60px;}
+  .fb1{background:var(--ink-soft);} .fb2{background:var(--plum);} .fb3{background:var(--bad);}
+  .fstep .lab{font-size:.88rem;color:var(--ink-2);min-width:150px;} .fstep .lab b{color:var(--ink);font-weight:600;}
+
+  /* Antes / depois */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+  @media(max-width:620px){.ba{grid-template-columns:1fr;}}
+  .bacard{border:1px solid var(--line-2);border-radius:16px;padding:22px;background:var(--paper-2);}
+  .bacard.wrong{border-color:rgba(199,55,31,.3);} .bacard.right{border-color:rgba(28,138,84,.35);background:#F0F6F1;}
+  .bacard .h{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;}
+  .bacard.wrong .h{color:var(--bad);} .bacard.right .h{color:var(--good);}
+  .bacard .big{font-family:var(--disp);font-weight:800;font-size:2.1rem;margin-top:10px;font-variant-numeric:tabular-nums;}
+  .bacard .cap{font-size:.86rem;color:var(--ink-2);margin-top:8px;}
+
+  .rec{border-left:5px solid var(--plum);background:var(--paper-2);border-radius:0 14px 14px 0;padding:20px 24px;margin-top:24px;}
+  .rec .t{font-family:var(--disp);font-weight:800;font-size:1.1rem;} .rec p{margin-top:8px;font-size:.98rem;color:var(--ink-2);} .rec p b{color:var(--ink);font-weight:600;}
+
+  .foot{padding:44px 0 56px;}
+  .sig{font-family:var(--mono);font-size:.78rem;color:var(--ink-soft);} .sig b{color:var(--plum);}
+  .disclaim{font-size:.74rem;color:var(--ink-soft);margin-top:12px;max-width:72ch;line-height:1.55;}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">Análise · Cardô × Hire · UGC e Fase 2 WhatsApp</span>
+  <h1 class="disp">Três leituras — e por que nenhuma é motivo de pânico.</h1>
+  <p class="thesis">Este documento traz três coisas que pedem decisão ou explicação: o <b>UGC Latam</b> (que recomendamos pausar), o <b>custo por lead da Fase 2</b> que parece ter triplicado (mas não foi o que parece), e a <b>baixa entrega de conversas no WhatsApp</b> (que já está sendo corrigida). Números puxados direto das contas.</p>
+</div></header>
+
+<div class="wrap">
+
+  <!-- 1. UGC -->
+  <section>
+    <div class="rn">01</div>
+    <h2 class="disp">UGC Latam — não está se pagando</h2>
+    <p class="intro">O UGC Latam roda há cerca de um mês levando tráfego pra o site. O problema: ele <b>traz visita, mas não traz venda</b>.</p>
+    <div class="stats">
+      <div class="stat"><div class="k">Investido</div><div class="n sm">R$ 823,76</div><div class="d">23/09 a 22/10</div></div>
+      <div class="stat"><div class="k">Visitas no site</div><div class="n pl">194</div><div class="d">custo R$ 4,25 / visita</div></div>
+      <div class="stat"><div class="k">Vendas</div><div class="n bad">0</div><div class="d">nenhuma no período</div></div>
+      <div class="stat"><div class="k">Faturamento</div><div class="n bad sm">R$ 0,00</div><div class="d">ROAS zero</div></div>
+    </div>
+    <div class="call bad">
+      <div class="tag">A leitura</div>
+      <p>O papel do UGC era <b>vender em vídeo</b>. Em um mês, ele gastou <b>R$ 824</b> e trouxe 194 visitas — mas <b>nenhuma virou venda</b>. O funil não fecha: a verba entra e não volta nada.</p>
+    </div>
+    <div class="rec">
+      <div class="t">Recomendação: pausar e redirecionar a verba</div>
+      <p>Enquanto o UGC não converter, esses ~R$ 800/mês rendem muito mais no <b>ebook</b> (lead a R$ 1–2) ou no <b>webinário</b>. Sugerimos <b>pausar o UGC agora</b> e, se quiserem, voltar depois com um ângulo/oferta diferente e um orçamento de teste pequeno — não com o volume atual.</p>
+    </div>
+  </section>
+
+  <!-- 2. O CPL que "subiu" -->
+  <section>
+    <div class="rn">02</div>
+    <h2 class="disp">O custo por lead da Fase 2 "subiu" de R$ 13 pra R$ 60?</h2>
+    <p class="intro">Essa é a mais importante de explicar: <b>o custo não piorou. A gente consertou a conta.</b> O R$ 13 era um número bonito, mas errado.</p>
+
+    <div class="ba">
+      <div class="bacard wrong">
+        <div class="h">Antes · o número errado</div>
+        <div class="big" style="color:var(--bad)">R$ 12,35</div>
+        <div class="cap">A planilha estava contando <b>cada clique no anúncio</b> como "lead". R$ 814 ÷ <b>66 cliques</b> = R$ 12,35. Parece ótimo — mas <b>clique não é lead</b>. Quem clica nem sempre manda mensagem.</div>
+      </div>
+      <div class="bacard right">
+        <div class="h">Agora · o número real</div>
+        <div class="big" style="color:var(--good)">R$ 62,68</div>
+        <div class="cap">Corrigimos a métrica: agora "lead" é uma <b>conversa de verdade iniciada no WhatsApp</b>. R$ 814 ÷ <b>13 conversas</b> = R$ 62,68. Esse é o custo real — e sempre foi.</div>
+      </div>
+    </div>
+
+    <div class="call good">
+      <div class="tag">O ponto</div>
+      <p>O CPL <b>não triplicou do nada</b> — ele sempre foi ~R$ 60. O que mudou foi a planilha passar a medir a coisa certa (conversa, não clique). <b>É melhor enxergar o número real do que um número falso que esconde o problema.</b> Com a verdade na mão, dá pra agir.</p>
+    </div>
+  </section>
+
+  <!-- 3. A quebra do WhatsApp -->
+  <section>
+    <div class="rn">03</div>
+    <h2 class="disp">O WhatsApp: muito gasto, poucas conversas — e o que já fizemos</h2>
+    <p class="intro">De <b>R$ 814</b> investidos, saíram <b>4 conversas reais</b>. Parece quebrado — e tinha mesmo um gargalo. Mas a causa é clara e <b>já foi corrigida</b>.</p>
+
+    <div class="funnel">
+      <div class="fstep"><div class="lab">Cliques no anúncio</div><div class="bar fb1" style="width:100%">66</div></div>
+      <div class="fstep"><div class="lab">Conversas iniciadas <b>(abriram o WhatsApp)</b></div><div class="bar fb2" style="width:40%">13</div></div>
+      <div class="fstep"><div class="lab">Conversas respondidas <b>(papo de verdade)</b></div><div class="bar fb3" style="width:14%">4</div></div>
+    </div>
+
+    <div class="call warn">
+      <div class="tag">A causa raiz</div>
+      <p>O público da Fase 2 era <b>minúsculo: 197 pessoas</b> (só quem viu a fase 1). E essas 197 já tinham visto o anúncio <b>~70 vezes cada</b> — saturação total. Sem gente nova pra alcançar, o custo por conversa dispara e a entrega trava. Não foi a mensagem nem o número do WhatsApp: foi <b>o público ter acabado</b>.</p>
+    </div>
+    <div class="call good">
+      <div class="tag">O que já corrigimos</div>
+      <p>Abrimos o público de <b>197 pra ~305 mil pessoas</b> (engajamento de 1 ano + lookalike dos compradores + leads). O efeito já apareceu: o alcance subiu pra <b>1.852</b> e a frequência caiu de 70 pra <b>8,4</b> — ou seja, <b>voltou a ter gente nova vendo o anúncio</b>. A tendência agora é o custo por conversa cair e entrar mais gente no WhatsApp.</p>
+    </div>
+  </section>
+
+  <section class="foot" style="border-bottom:none">
+    <div class="sig">Análise interna · <b>Cardô Marketing</b> × Hire Brazil</div>
+    <p class="disclaim">Números puxados das contas de anúncio e das planilhas de funil (acumulado até 22/10/2026, câmbio US$ 5,19). O custo por lead da Fase 2 passou a refletir conversas iniciadas no WhatsApp após a correção da coluna "Leads" na planilha (antes trazia cliques). O público ampliado foi aplicado em 21/10; os efeitos de alcance e frequência já constam acima.</p>
+  </section>
+
+</div>
+</body>
+</html>
